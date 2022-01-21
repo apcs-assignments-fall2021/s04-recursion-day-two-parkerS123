@@ -46,8 +46,18 @@ public class MyMain {
     // countBigDigits(99999) => 5
     // countBigDigits(521931) => 2
     public static int countBigDigits(int x) {
-        // YOUR CODE HERE
-        return -1;
+        return countBigDigitsTR(x, 0);
+    }
+
+
+    public static int countBigDigitsTR(int x, int count) {
+        if (x == 0) {
+            return count;
+        } else if ((x % 10) >= 5) {
+            return countBigDigitsTR(x / 10, count + 1);
+        } else {
+            return countBigDigitsTR(x / 10, count);
+        }
     }
 
     // Write a method that uses recursion to calculate whether
@@ -64,8 +74,22 @@ public class MyMain {
     // moreOddThanEven(99999) => true because 5 odd and 0 even
     // moreOddThanEven(521931) => true because 5 odd and 1 even
     public static boolean moreOddThanEven(int x) {
-        // YOUR CODE HERE
-        return false;
+        return moreOddThanEvenTR(x, 0, 0);
+    }
+
+
+    public static boolean moreOddThanEvenTR(int x, int oddcount, int evencount) {
+        if (x == 0) {
+            if (oddcount > evencount) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (((x % 10) % 2) == 0) {
+            return moreOddThanEvenTR(x / 10, oddcount, evencount + 1);
+        } else {
+            return moreOddThanEvenTR(x / 10, oddcount + 1, evencount);
+        }
     }
 
     // This might be helpful to get started:
@@ -81,12 +105,18 @@ public class MyMain {
     // isPalindrome("madam") => true
     // isPalindrome("racecars") => false
     public static boolean isPalindrome(String str) {
-        // YOUR CODE HERE
-        return false;
+
+        if (str.length() == 0) {
+            return true;
+        } else if (str.substring(0, 1).equals(str.substring(str.length() - 1, str.length()))) {
+            if (str.substring(1, str.length() - 1).length() <= 1) {
+                return true;
+            }
+            return isPalindrome(str.substring(1, str.length() - 1));
+        } else {
+            return false;
+        }
     }
-
-
-
 
 
     // Methods for homework:
@@ -98,8 +128,19 @@ public class MyMain {
     // countBigDigits(99999) => 45
     // countBigDigits(521931) => 21
     public static int addDigits(int x) {
-        // YOUR CODE HERE
-        return -1;
+        return addDigitsTR(x, 0);
+
+    }
+
+    public static int addDigitsTR(int x, int sum) {
+        if (x == 0){
+            return sum;
+        }
+        else {
+            sum = sum + (x % 10);
+            return addDigitsTR((x / 10), sum);
+        }
+
     }
 
     // Write a method that is given a String containing a single pair
@@ -112,8 +153,19 @@ public class MyMain {
     // parenTrim("x(hello)") => "(hello)"
     // parenTrim("(xy)1") => "(xy)"
     public static String parenTrim(String str) {
-        // YOUR CODE HERE
-        return "";
+        if (str.charAt(0) == '(' && str.charAt(str.length() - 1) == ')'){
+            return str;
+        }
+        else if (str.charAt(0) != '(') {
+            return parenTrim(str.substring(1));
+        }
+        else if (str.charAt(str.length() - 1) != ')'){
+            return parenTrim(str.substring(0, str.length() - 2));
+        }
+        else {
+            return str;
+        }
+
     }
 
     // This method returns the orignal string reversed;
@@ -122,8 +174,19 @@ public class MyMain {
     // reverse("desserts") => stressed
     // reverse("racecar") => racecar
     public static String reverse(String str) {
-        // YOUR CODE HERE
-        return "";
+
+        return reverseTR(str, "");
+    }
+
+    public static String reverseTR(String str, String str2){
+        if (str.length() == 0){
+            return str2;
+        }
+        else {
+            str2 = str2 + str.charAt(str.length() - 1);
+            return reverse(str.substring(0, str.length() - 2));
+        }
+
     }
 
 
