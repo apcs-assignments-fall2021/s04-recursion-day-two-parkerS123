@@ -160,7 +160,7 @@ public class MyMain {
             return parenTrim(str.substring(1));
         }
         else if (str.charAt(str.length() - 1) != ')'){
-            return parenTrim(str.substring(0, str.length() - 2));
+            return parenTrim(str.substring(0, str.length() - 1 ));
         }
         else {
             return str;
@@ -184,7 +184,7 @@ public class MyMain {
         }
         else {
             str2 = str2 + str.charAt(str.length() - 1);
-            return reverse(str.substring(0, str.length() - 2));
+            return reverseTR(str.substring(0, str.length() - 1), str2);
         }
 
     }
